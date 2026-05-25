@@ -73,116 +73,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 3. INTERACTIVE CEILING DIAGRAM (TABBED SWITCHER WITH LAYER LAYERING)
+    // 3. STICKY SCROLL CONSTRUCTION DIAGRAM
     // =========================================================================
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    const tabNextBtn = document.getElementById('tab-next-btn');
-    
     const svgProfile = document.getElementById('svg-profile');
     const svgLight = document.getElementById('svg-light');
     const svgCanvas = document.getElementById('svg-canvas');
+    const stageDots = document.querySelectorAll('.stage-dot');
+    const stageBlocks = document.querySelectorAll('.stage-block');
+    const tabNextBtn = document.getElementById('tab-next-btn');
 
-    const tabKeys = ['profile', 'lighting', 'canvas'];
-    let currentTabIndex = 0;
-    let autoRotateInterval;
-
-    function activateTab(tabKey) {
-        currentTabIndex = tabKeys.indexOf(tabKey);
-        
-        // 1. Highlight tab button
-        tabButtons.forEach(btn => {
-            if (btn.getAttribute('data-tab') === tabKey) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-
-        // 2. Highlight tab content panel
-        tabPanes.forEach(pane => {
-            if (pane.getAttribute('id') === `pane-${tabKey}`) {
-                pane.classList.add('active');
-            } else {
-                pane.classList.remove('active');
-            }
-        });
-
-        // 3. Layer SVG components (profile -> lighting -> canvas)
-        if (tabKey === 'profile') {
+    function activateSvgLayer(stageKey) {
+        if (stageKey === 'profile') {
             svgProfile.classList.add('active');
             svgLight.classList.remove('active');
             svgCanvas.classList.remove('active');
-        } else if (tabKey === 'lighting') {
+        } else if (stageKey === 'lighting') {
             svgProfile.classList.add('active');
             svgLight.classList.add('active');
             svgCanvas.classList.remove('active');
-        } else if (tabKey === 'canvas') {
+        } else if (stageKey === 'canvas') {
             svgProfile.classList.add('active');
             svgLight.classList.add('active');
             svgCanvas.classList.add('active');
         }
-
-        // 4. Update the "Далее" button text/action on the last tab
-        if (tabKey === 'canvas') {
-            tabNextBtn.innerHTML = 'Заказать замер <i class="fa-solid fa-chevron-right"></i>';
-        } else {
-            tabNextBtn.innerHTML = 'Далее <i class="fa-solid fa-arrow-right"></i>';
-        }
-    }
-
-    // Tab buttons click listeners
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const selectedTab = btn.getAttribute('data-tab');
-            activateTab(selectedTab);
-            stopAutoRotate(); // stop cycling when user interacts manually
+        stageDots.forEach(dot => {
+            dot.classList.toggle('active', dot.getAttribute('data-stage') === stageKey);
         });
-    });
-
-    // "Далее" button navigation listener
-    tabNextBtn.addEventListener('click', () => {
-        if (tabKeys[currentTabIndex] === 'canvas') {
-            // Scroll to contact form
-            document.getElementById('contacts').scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => {
-                document.getElementById('user-name').focus();
-            }, 800);
-        } else {
-            // Go to next tab
-            const nextIndex = (currentTabIndex + 1) % tabKeys.length;
-            activateTab(tabKeys[nextIndex]);
-        }
-        stopAutoRotate();
-    });
-
-    // Automatic tab rotation helper
-    function startAutoRotate() {
-        autoRotateInterval = setInterval(() => {
-            const nextIndex = (currentTabIndex + 1) % tabKeys.length;
-            activateTab(tabKeys[nextIndex]);
-        }, 5500); // 5.5 seconds interval
     }
 
-    function stopAutoRotate() {
-        if (autoRotateInterval) {
-            clearInterval(autoRotateInterval);
-        }
-    }
-
-    // Initialize auto rotation
-    startAutoRotate();
-
-    // Pause on hover of the interactive container
-    const interactiveContainer = document.querySelector('.interactive-tabs-container');
-    if (interactiveContainer) {
-        interactiveContainer.addEventListener('mouseenter', stopAutoRotate);
-        interactiveContainer.addEventListener('mouseleave', () => {
-            // only restart if we haven't clicked any tab yet
-            if (autoRotateInterval) {
-                stopAutoRotate();
-                startAutoRotate();
+    const stageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                activateSvgLayer(entry.target.getAttribute('data-stage'));
             }
+        });
+    }, {
+        threshold: 0.4,
+        rootMargin: '-15% 0px -15% 0px'
+    });
+
+    stageBlocks.forEach(block => stageObserver.observe(block));
+
+    if (tabNextBtn) {
+        tabNextBtn.addEventListener('click', () => {
+            document.getElementById('contacts').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('user-name').focus(), 800);
         });
     }
 

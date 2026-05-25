@@ -81,7 +81,7 @@
         </div>
     </section>
 
-    <!-- Interactive Construction Section (Секция 3) -->
+    <!-- Construction Section (Секция 3) — Sticky Scroll Layout -->
     <section class="construction-section" id="construction">
         <div class="section-container">
             <div class="section-header text-center">
@@ -89,156 +89,127 @@
                 <h2 class="section-title">Этапы создания потолка</h2>
                 <div class="title-separator"></div>
             </div>
+        </div>
 
-            <div class="interactive-tabs-container">
-                <!-- Left Side: Interactive SVG (View from below diagonally) -->
-                <div class="tab-visual-side">
-                    <div class="schema-card">
-                        <svg id="ceiling-svg" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <!-- Glow filters -->
-                                <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
-                                    <feGaussianBlur stdDeviation="8" result="blur" />
-                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                </filter>
-                                <filter id="glow-amber" x="-30%" y="-30%" width="160%" height="160%">
-                                    <feGaussianBlur stdDeviation="12" result="blur" />
-                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                </filter>
-                                <!-- Light beam gradient -->
-                                <linearGradient id="beam-grad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#ffa500" stop-opacity="0.6" />
-                                    <stop offset="100%" stop-color="#ffa500" stop-opacity="0" />
-                                </linearGradient>
-                                <!-- Canvas texture glow -->
-                                <linearGradient id="canvas-glow-grad" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color="var(--accent-gold)" stop-opacity="0.25" />
-                                    <stop offset="50%" stop-color="var(--accent-gold)" stop-opacity="0.08" />
-                                    <stop offset="100%" stop-color="var(--accent-gold)" stop-opacity="0" />
-                                </linearGradient>
-                            </defs>
+        <div class="construction-sticky-layout">
+            <!-- Left: Sticky SVG Diagram -->
+            <div class="sticky-visual-side">
+                <div class="schema-card">
+                    <svg id="ceiling-svg" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="8" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                            <filter id="glow-amber" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="12" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                            <linearGradient id="beam-grad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ffa500" stop-opacity="0.6" />
+                                <stop offset="100%" stop-color="#ffa500" stop-opacity="0" />
+                            </linearGradient>
+                            <linearGradient id="canvas-glow-grad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="var(--accent-gold)" stop-opacity="0.25" />
+                                <stop offset="50%" stop-color="var(--accent-gold)" stop-opacity="0.08" />
+                                <stop offset="100%" stop-color="var(--accent-gold)" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
 
-                            <!-- Subtle perspective room corner walls outline for context -->
-                            <path d="M 50,420 L 50,220 L 250,100 L 250,420" fill="none" stroke="#1c1c1f" stroke-width="1" />
-                            <path d="M 450,420 L 450,220 L 250,100" fill="none" stroke="#1c1c1f" stroke-width="1" />
+                        <path d="M 50,420 L 50,220 L 250,100 L 250,420" fill="none" stroke="#1c1c1f" stroke-width="1" />
+                        <path d="M 450,420 L 450,220 L 250,100" fill="none" stroke="#1c1c1f" stroke-width="1" />
 
-                            <!-- LAYER 1: Profile Frame (Always active as base) -->
-                            <g id="svg-profile" class="svg-element active">
-                                <!-- Double perimeter lines showing shadow gap profile -->
-                                <polygon points="50,220 250,100 450,220 250,340" fill="none" stroke="#222" stroke-width="5" />
-                                <polygon points="50,220 250,100 450,220 250,340" fill="none" stroke="#3a3a3c" stroke-width="2" />
-                                <!-- Glowing active outline -->
-                                <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="none" stroke="var(--accent-gold)" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
-                                
-                                <!-- Label Arrow -->
-                                <path class="arrow-marker" d="M 40,210 L 120,185" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
-                                <circle cx="120" cy="185" r="2.5" fill="var(--accent-gold)" />
-                                <text class="step-label" x="30" y="214" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">1. ПРОФИЛЬНЫЙ КАРКАС</text>
-                            </g>
+                        <g id="svg-profile" class="svg-element active">
+                            <polygon points="50,220 250,100 450,220 250,340" fill="none" stroke="#222" stroke-width="5" />
+                            <polygon points="50,220 250,100 450,220 250,340" fill="none" stroke="#3a3a3c" stroke-width="2" />
+                            <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="none" stroke="var(--accent-gold)" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
+                            <path class="arrow-marker" d="M 40,210 L 120,185" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
+                            <circle cx="120" cy="185" r="2.5" fill="var(--accent-gold)" />
+                            <text class="step-label" x="30" y="214" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">1. ПРОФИЛЬНЫЙ КАРКАС</text>
+                        </g>
 
-                            <!-- LAYER 2: Light (Layers over Profile) -->
-                            <g id="svg-light" class="svg-element">
-                                <!-- Recessed track slot -->
-                                <line x1="160" y1="180" x2="340" y2="180" stroke="#1c1c1e" stroke-width="8" stroke-linecap="round" />
-                                <line class="glow-effect" x1="160" y1="180" x2="340" y2="180" stroke="var(--accent-gold)" stroke-width="2.5" stroke-linecap="round" opacity="0" filter="url(#glow-gold)" />
-                                
-                                <!-- Modern ring light in the center -->
-                                <ellipse cx="250" cy="220" rx="70" ry="28" fill="none" stroke="#222" stroke-width="4" />
-                                <ellipse class="glow-effect" cx="250" cy="220" rx="70" ry="28" fill="none" stroke="#fff" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
-                                
-                                <!-- Light beams -->
-                                <polygon class="light-beam" points="180,220 320,220 390,390 110,390" fill="url(#beam-grad)" opacity="0" style="mix-blend-mode: screen;" />
+                        <g id="svg-light" class="svg-element">
+                            <line x1="160" y1="180" x2="340" y2="180" stroke="#1c1c1e" stroke-width="8" stroke-linecap="round" />
+                            <line class="glow-effect" x1="160" y1="180" x2="340" y2="180" stroke="var(--accent-gold)" stroke-width="2.5" stroke-linecap="round" opacity="0" filter="url(#glow-gold)" />
+                            <ellipse cx="250" cy="220" rx="70" ry="28" fill="none" stroke="#222" stroke-width="4" />
+                            <ellipse class="glow-effect" cx="250" cy="220" rx="70" ry="28" fill="none" stroke="#fff" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
+                            <polygon class="light-beam" points="180,220 320,220 390,390 110,390" fill="url(#beam-grad)" opacity="0" style="mix-blend-mode: screen;" />
+                            <path class="arrow-marker" d="M 40,270 L 180,220" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
+                            <circle cx="180" cy="220" r="2.5" fill="var(--accent-gold)" />
+                            <text class="step-label" x="30" y="274" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">2. ИНТЕГРИРОВАННЫЙ СВЕТ</text>
+                        </g>
 
-                                <!-- Label Arrow -->
-                                <path class="arrow-marker" d="M 40,270 L 180,220" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
-                                <circle cx="180" cy="220" r="2.5" fill="var(--accent-gold)" />
-                                <text class="step-label" x="30" y="274" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">2. ИНТЕГРИРОВАННЫЙ СВЕТ</text>
-                            </g>
+                        <g id="svg-canvas" class="svg-element">
+                            <polygon points="50,220 250,100 450,220 250,340" fill="rgba(245, 245, 247, 0.05)" />
+                            <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="url(#canvas-glow-grad)" opacity="0" />
+                            <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="none" stroke="var(--accent-gold)" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
+                            <path class="arrow-marker" d="M 40,330 L 150,290" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
+                            <circle cx="150" cy="290" r="2.5" fill="var(--accent-gold)" />
+                            <text class="step-label" x="30" y="334" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">3. НАТЯЖНОЕ ПОЛОТНО</text>
+                        </g>
+                    </svg>
+                    <div class="stage-progress">
+                        <div class="stage-dot active" data-stage="profile"></div>
+                        <div class="stage-dot" data-stage="lighting"></div>
+                        <div class="stage-dot" data-stage="canvas"></div>
+                    </div>
+                </div>
+            </div>
 
-                            <!-- LAYER 3: Ceiling Canvas (Layers over Profile & Light) -->
-                            <g id="svg-canvas" class="svg-element">
-                                <!-- Solid canvas covering ceiling boundary -->
-                                <polygon points="50,220 250,100 450,220 250,340" fill="rgba(245, 245, 247, 0.05)" />
-                                <!-- Glowing finished texture sheen -->
-                                <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="url(#canvas-glow-grad)" opacity="0" />
-                                <polygon class="glow-effect" points="50,220 250,100 450,220 250,340" fill="none" stroke="var(--accent-gold)" stroke-width="2.5" opacity="0" filter="url(#glow-gold)" />
+            <!-- Right: Scrollable stage blocks -->
+            <div class="stages-scroll-side">
 
-                                <!-- Label Arrow -->
-                                <path class="arrow-marker" d="M 40,330 L 150,290" stroke="var(--accent-gold)" stroke-width="1" fill="none" />
-                                <circle cx="150" cy="290" r="2.5" fill="var(--accent-gold)" />
-                                <text class="step-label" x="30" y="334" fill="var(--accent-gold)" font-family="'Montserrat', sans-serif" font-size="10" font-weight="600" text-anchor="end">3. НАТЯЖНОЕ ПОЛОТНО</text>
-                            </g>
-                        </svg>
+                <div class="stage-block" id="stage-profile" data-stage="profile">
+                    <div class="stage-content">
+                        <div class="stage-number">01</div>
+                        <div class="pane-tag">Основа конструкции</div>
+                        <h3 class="pane-title">Высокотехнологичный профиль</h3>
+                        <p class="pane-text">
+                            Несущая конструкция по периметру стен. Мы устанавливаем оригинальный алюминиевый профиль <strong>EuroKRAAB</strong>, создающий безупречный теневой шов шириной 6 мм.
+                        </p>
+                        <ul class="pane-list">
+                            <li><i class="fa-solid fa-check gold-text"></i> Ровный теневой зазор без резиновых маскировочных вставок</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Жесткий алюминиевый каркас предотвращает провисание</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Безупречная стыковка и геометрия углов любой сложности</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Right Side: Tabs and Content (Ensures all text is visible) -->
-                <div class="tab-text-side">
-                    <!-- Segmented tab triggers -->
-                    <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="profile">
-                            <span class="tab-num">01</span> Профиль
-                        </button>
-                        <button class="tab-btn" data-tab="lighting">
-                            <span class="tab-num">02</span> Свет
-                        </button>
-                        <button class="tab-btn" data-tab="canvas">
-                            <span class="tab-num">03</span> Потолок
-                        </button>
-                    </div>
-
-                    <!-- Tab content panes (fixed size, fits screen perfectly) -->
-                    <div class="tab-contents">
-                        
-                        <!-- Pane 1: Profile -->
-                        <div class="tab-pane active" id="pane-profile">
-                            <div class="pane-tag">Основа конструкции</div>
-                            <h3 class="pane-title">Высокотехнологичный профиль</h3>
-                            <p class="pane-text">
-                                Несущая конструкция по периметру стен. Мы устанавливаем оригинальный алюминиевый профиль <strong>EuroKRAAB</strong>, создающий безупречный теневой шов шириной 6 мм. 
-                            </p>
-                            <ul class="pane-list">
-                                <li><i class="fa-solid fa-check gold-text"></i> Ровный теневой зазор без резиновых маскировочных вставок</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Жесткий алюминиевый каркас предотвращает провисание</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Безупречная стыковка и геометрия углов любой сложности</li>
-                            </ul>
-                        </div>
-
-                        <!-- Pane 2: Light -->
-                        <div class="tab-pane" id="pane-lighting">
-                            <div class="pane-tag">Атмосфера и сценарии</div>
-                            <h3 class="pane-title">Интегрированный свет</h3>
-                            <p class="pane-text">
-                                Освещение монтируется в конструкцию согласно вашему дизайн-проекту. Мы интегрируем любые современные решения: магнитные треки, световые линии или контурные ниши.
-                            </p>
-                            <ul class="pane-list">
-                                <li><i class="fa-solid fa-check gold-text"></i> Магнитные шинопроводы для перестановки светильников</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Мягкая светодиодная подсветка по периметру шва</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Полная совместимость с системами «Умного дома»</li>
-                            </ul>
-                        </div>
-
-                        <!-- Pane 3: Canvas -->
-                        <div class="tab-pane" id="pane-canvas">
-                            <div class="pane-tag">Финишное покрытие</div>
-                            <h3 class="pane-title">Декоративное полотно</h3>
-                            <p class="pane-text">
-                                Натяжная плоскость премиум-класса. Вы можете выбрать матовое, глянцевое или сатиновое полотно, а также полотна с узором согласно вашей дизайнерской концепции.
-                            </p>
-                            <ul class="pane-list">
-                                <li><i class="fa-solid fa-check gold-text"></i> Экологически чистые полотна MSD Premium и Teqtum (класс А+)</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Противопожарная безопасность (сертификат класса KM2)</li>
-                                <li><i class="fa-solid fa-check gold-text"></i> Абсолютная влагостойкость и защита от протечек сверху</li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <!-- Next button inside tabs to navigate easily -->
-                    <div class="tab-navigation">
-                        <button class="btn btn-primary" id="tab-next-btn">Далее <i class="fa-solid fa-arrow-right"></i></button>
+                <div class="stage-block" id="stage-lighting" data-stage="lighting">
+                    <div class="stage-content">
+                        <div class="stage-number">02</div>
+                        <div class="pane-tag">Атмосфера и сценарии</div>
+                        <h3 class="pane-title">Интегрированный свет</h3>
+                        <p class="pane-text">
+                            Освещение монтируется в конструкцию согласно вашему дизайн-проекту. Мы интегрируем любые современные решения: магнитные треки, световые линии или контурные ниши.
+                        </p>
+                        <ul class="pane-list">
+                            <li><i class="fa-solid fa-check gold-text"></i> Магнитные шинопроводы для перестановки светильников</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Мягкая светодиодная подсветка по периметру шва</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Полная совместимость с системами «Умного дома»</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="stage-block" id="stage-canvas" data-stage="canvas">
+                    <div class="stage-content">
+                        <div class="stage-number">03</div>
+                        <div class="pane-tag">Финишное покрытие</div>
+                        <h3 class="pane-title">Декоративное полотно</h3>
+                        <p class="pane-text">
+                            Натяжная плоскость премиум-класса. Вы можете выбрать матовое, глянцевое или сатиновое полотно, а также полотна с узором согласно вашей дизайнерской концепции.
+                        </p>
+                        <ul class="pane-list">
+                            <li><i class="fa-solid fa-check gold-text"></i> Экологически чистые полотна MSD Premium и Teqtum (класс А+)</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Противопожарная безопасность (сертификат класса KM2)</li>
+                            <li><i class="fa-solid fa-check gold-text"></i> Абсолютная влагостойкость и защита от протечек сверху</li>
+                        </ul>
+                        <div class="stage-cta">
+                            <button class="btn btn-primary" id="tab-next-btn">Заказать замер <i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

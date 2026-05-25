@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Process \"c:\\\\Users\\\\Prodject\\\\Desktop\\\\alex-werk-ceilings\\\\index.html\")"
+    ]
+  }
+}
